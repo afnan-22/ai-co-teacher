@@ -29,3 +29,4 @@ future
 joblib
 fastapi
 pydantic
+wget
