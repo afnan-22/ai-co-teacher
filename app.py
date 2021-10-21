@@ -20,6 +20,17 @@ qg = main.QGen()
 # output.append(qg.predict_mcq(j_object))
 # output.append(qe.predict_boolq(j_object))
 
+@app.get("/init", status_code=200)
+async def init_state():
+    import wget
+    url = 'https://github.com/explosion/sense2vec/releases/download/v1.0.0/s2v_reddit_2015_md.tar.gz' 
+    filename = wget.download(url)
+    import tarfile
+    tar = tarfile.open(filename)
+    tar.extractall('./')
+    tar.close()
+    return "Initilized"
+
 @app.post("/boolean", status_code=201)
 async def post_questions_boolean(payload:Payload):
    #print(json.dumps(payload.input_text))
